@@ -192,56 +192,37 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           const VerticalDivider(thickness: 1, width: 1),
           Expanded(
-            child: ListView.separated(
-              itemCount: 6, // Numero di elementi nella lista
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider(
-                  thickness: 1, // Spessore della linea
-                  color: Colors.grey, // Colore della linea
-                  indent: 16, // Margine a sinistra
-                  endIndent: 16, // Margine a destra
-                );
-              },
-              itemBuilder: (BuildContext context, int index) {
-                // Dati per ogni elemento della lista
-                final names = [
-                  'Alejandro Ortega',
-                  'Sophia Sacchi',
-                  'Anna Russo',
-                  'Silvia Petrone',
-                  'Flavio Petrone',
-                  'Michele Pacifico'
-                ];
-                final messages = [
-                  '5 messages',
-                  '7 messages',
-                  '2 messages',
-                  '9 messages',
-                  '3 messages',
-                  '4 messages'
-                ];
-                final initials = ['A', 'S', 'R', 'S', 'F', 'M'];
-
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.deepPurple,
-                    child: Text(
-                      initials[index], // Lettera dell'avatar
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+            child: Scrollbar(
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: List.generate(
+                    50,
+                    (index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.deepPurple,
+                          child: Text(
+                            'Item $index',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        title: Text('Messaggio numero $index'),
+                        subtitle: Text('Descrizione messaggio $index'),
+                        trailing: const Icon(Icons.message,
+                            color: Colors.deepPurple),
+                        onTap: () {
+                          print('Tapped on Elemento numero $index');
+                        },
                       ),
-                    ), // Sfondo dell'avatar
+                    ),
                   ),
-                  title: Text(names[index]), // Nome
-                  subtitle: Text(messages[index]), // Numero di messaggi
-                  trailing: Icon(Icons.message, color: Colors.deepPurple),
-                  onTap: () {
-                    // Azione al tocco della ListTile
-                    print('Tapped on ${names[index]}');
-                  },
-                );
-              },
+                ),
+              ),
             ),
           ),
         ],
